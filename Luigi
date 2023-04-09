@@ -1,0 +1,163 @@
+package pixelArt3;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Canvas;
+import java.awt.Frame;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
+
+public class Luigi {
+    static int width = 800;
+    static int height = 800;
+    
+    static Color verde = new Color(28,179,75,255);
+    static Color pelo = new Color(68,30,0,255);
+    static Color cuerpo = new Color(255,195,6,255);
+    static Color vigote = new Color(2,2,2,255);
+    static Color oberol = new Color(0,0,255,255);
+    
+    static Graphics2D g;
+
+    static BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+   
+    private final static int PIXEL_SIZE = 40;
+    
+    
+    public static void paint() {
+    	
+    
+    	drawBackground(PIXEL_SIZE, Color.white);  
+    	
+    	fillRect(6, 2, 5, 1, verde);
+    	fillRect(5, 3, 9, 1, verde);
+    	fillRect(5, 4, 3, 1, pelo);
+    	fillRect(4, 5, 1, 2, pelo);
+    	putPixel(5,7,pelo);
+    	putPixel(6,5,pelo);
+    	fillRect(6, 6, 2, 1, pelo);
+    	
+    	fillRect(8, 4, 2, 5, cuerpo);
+    	fillRect(6, 7, 2, 2, cuerpo);
+    	fillRect(5, 5, 1, 2, cuerpo);
+    	fillRect(10, 8, 2, 1, cuerpo);
+    	putPixel(7,5,cuerpo);
+    	putPixel(10,6,cuerpo);
+    	fillRect(11, 4, 1, 2, cuerpo);
+    	fillRect(12, 5, 2, 2, cuerpo);
+    	putPixel(14,6,cuerpo);
+    	fillRect(10, 4, 1, 2, vigote);
+    	putPixel(11,6,vigote);
+    	fillRect(10, 7, 4, 1, vigote);
+    	
+    	fillRect(5, 9, 2, 3, verde);
+    	fillRect(4, 10, 1, 2, verde);
+    	putPixel(3,11,verde);
+    	putPixel(5,12,verde);
+    	
+    	fillRect(11, 9, 2, 3, verde);
+    	fillRect(13, 10, 1, 2, verde);
+    	putPixel(14,11,verde);
+    	putPixel(12,12,verde);
+    	
+    	fillRect(8, 9, 2, 2, verde);
+    	
+    	fillRect(7, 9, 1, 3, oberol);
+    	fillRect(10, 9, 1, 3, oberol);
+    	fillRect(8, 11, 2, 4, oberol);
+    	fillRect(6, 13, 2, 3, oberol);
+    	fillRect(10, 13, 2, 3, oberol);
+    	fillRect(12, 14, 1, 2, oberol);
+    	fillRect(5, 14, 1, 2, oberol);
+    	putPixel(6,12,oberol);
+    	putPixel(11,12,oberol);
+    	
+    	putPixel(7,12,Color.yellow);
+    	putPixel(10,12,Color.yellow);
+    	
+    	putPixel(3,17,pelo);
+    	putPixel(14,17,pelo);
+    	
+    	fillRect(4, 16, 3, 2, vigote);
+    	fillRect(11, 16,3 , 2, vigote);
+    	
+    	fillRect(3, 12, 2, 3, cuerpo);
+    	fillRect(13, 12, 2, 3, cuerpo);
+    	
+    	putPixel(5,13,cuerpo);
+    	putPixel(12,13,cuerpo);
+    	
+      // fillRect(1, 9, 13, 6, Color.black);
+      
+       
+      
+      
+      //  drawVerticalLine(7,8,3,softOrange);
+       
+     
+      //  putPixel(9,7,darkBlue);
+        
+      //  putPixel(12,10,softOrange);
+      //  putPixel(7,8,softOrange);
+       drawSquareGrid(PIXEL_SIZE, Color.black);
+    	
+        // Guardamos la imagen en formato JPG
+    	
+    	
+        try {       
+            ImageIO.write(image, "jpg", new File("Luigi.jpg"));
+            System.out.println("EXITO !!!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private static void drawVerticalLine(int a, int b, int x, Color c){
+    	for(int i=a;i<=b;i++){
+     	   g.setColor(c);
+           g.fillRect(x * PIXEL_SIZE, i * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
+        }
+    }
+    
+    private static void drawHorizontalLine(int a, int b, int y, Color c){
+        for(int i=a;i<=b;i++){
+     	   g.setColor(c);
+           g.fillRect(i * PIXEL_SIZE, y * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
+        }
+    }
+    
+    private static void putPixel(int x, int y, Color c){       
+	   g.setColor(c);
+	   g.fillRect(x * PIXEL_SIZE, y * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);    
+    }
+    
+    private static void fillRect(int x, int y, int width, int height, Color c){
+    	g.setColor(c);
+    	g.fillRect(x * PIXEL_SIZE, y * PIXEL_SIZE, width*PIXEL_SIZE, height*PIXEL_SIZE);
+    }
+    
+    private static void drawSquareGrid(int size, Color c) {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {                
+                g.setColor(c);
+                g.drawRect(i * PIXEL_SIZE, j * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
+            }
+        }
+    }
+    private static void drawBackground(int size, Color c) {
+    	for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                g.setColor(c);
+                g.fillRect(i * PIXEL_SIZE, j * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);                
+            }
+        }
+    }
+    
+    
+    public static void main(String[] args) {
+        g = image.createGraphics();        
+        paint();
+    }
+}
