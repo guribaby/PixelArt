@@ -1,0 +1,131 @@
+package pixelArt4;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Canvas;
+import java.awt.Frame;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
+
+public class piolin {
+    static int width = 800;
+    static int height = 800;
+    
+    static Color amarillo = new Color(255,193,60,255);
+    static Color patas = new Color(255,125,62,255);
+    static Color cuerpo = new Color(255,195,6,255);
+    static Color vigote = new Color(2,2,2,255);
+    static Color oberol = new Color(0,0,255,255);
+    
+    static Graphics2D g;
+
+    static BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+   
+    private final static int PIXEL_SIZE = 40;
+    
+    
+    public static void paint() {
+    	
+    
+    	drawBackground(PIXEL_SIZE, Color.white);  
+    	
+    	fillRect(7, 4, 5, 2, amarillo);
+    	fillRect(6, 5, 1, 5, amarillo);
+    	fillRect(12, 5, 1, 5, amarillo);
+    	fillRect(7, 6, 2, 2, amarillo);
+    	fillRect(10, 9, 2, 2, amarillo);
+    	fillRect(7, 9, 2, 2, amarillo);
+    	fillRect(8, 10, 3, 5, amarillo);
+    	fillRect(9, 4, 1, 5, amarillo);
+    	putPixel(7,9,amarillo);
+    	putPixel(11,9,amarillo);
+    	
+    	putPixel(5,14,patas);
+    	putPixel(13,14,patas);
+    	putPixel(8,15,patas);
+    	putPixel(10,15,patas);
+    	putPixel(9,9,patas);
+    	
+    	fillRect(6, 13, 2, 3, patas);
+    	fillRect(11, 13, 2, 3, patas);
+    	
+    	fillRect(7, 6, 2, 3, Color.white);
+    	fillRect(10, 6, 2, 3, Color.white);
+    	
+    	fillRect(8, 7, 1, 2, Color.blue);
+    	fillRect(10, 7, 1, 2, Color.blue);
+    
+      // fillRect(1, 9, 13, 6, Color.black);
+      
+       
+      
+      
+      //  drawVerticalLine(7,8,3,softOrange);
+       
+     
+      //  putPixel(9,7,darkBlue);
+        
+      //  putPixel(12,10,softOrange);
+      //  putPixel(7,8,softOrange);
+       drawSquareGrid(PIXEL_SIZE, Color.black);
+    	
+        // Guardamos la imagen en formato JPG
+    	
+    	
+        try {       
+            ImageIO.write(image, "jpg", new File("Piolin.jpg"));
+            System.out.println("EXITO !!!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private static void drawVerticalLine(int a, int b, int x, Color c){
+    	for(int i=a;i<=b;i++){
+     	   g.setColor(c);
+           g.fillRect(x * PIXEL_SIZE, i * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
+        }
+    }
+    
+    private static void drawHorizontalLine(int a, int b, int y, Color c){
+        for(int i=a;i<=b;i++){
+     	   g.setColor(c);
+           g.fillRect(i * PIXEL_SIZE, y * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
+        }
+    }
+    
+    private static void putPixel(int x, int y, Color c){       
+	   g.setColor(c);
+	   g.fillRect(x * PIXEL_SIZE, y * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);    
+    }
+    
+    private static void fillRect(int x, int y, int width, int height, Color c){
+    	g.setColor(c);
+    	g.fillRect(x * PIXEL_SIZE, y * PIXEL_SIZE, width*PIXEL_SIZE, height*PIXEL_SIZE);
+    }
+    
+    private static void drawSquareGrid(int size, Color c) {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {                
+                g.setColor(c);
+                g.drawRect(i * PIXEL_SIZE, j * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
+            }
+        }
+    }
+    private static void drawBackground(int size, Color c) {
+    	for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                g.setColor(c);
+                g.fillRect(i * PIXEL_SIZE, j * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);                
+            }
+        }
+    }
+    
+    
+    public static void main(String[] args) {
+        g = image.createGraphics();        
+        paint();
+    }
+}
