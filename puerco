@@ -1,0 +1,124 @@
+package pixelArt2;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Canvas;
+import java.awt.Frame;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
+
+public class porky {
+    static int width = 800;
+    static int height = 800;
+    
+    static Color rosa = new Color(237,157,155,255);
+    static Color blanco = new Color(252,250,253,255);
+    static Color cuerpo = new Color(235,195,196,255);
+    static Color cafe = new Color(153,82,86,255);
+    static Color softOrange = new Color(252,109,3);
+    
+    static Graphics2D g;
+
+    static BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+   
+    private final static int PIXEL_SIZE = 40;
+    
+    
+    public static void paint() {
+    	
+    
+    	drawBackground(PIXEL_SIZE, Color.white);  
+    	
+    	fillRect(6, 6, 8, 3, rosa);
+    	fillRect(8, 9, 4, 1, rosa);
+    	fillRect(6, 10, 2, 4, rosa);
+    	fillRect(12, 10, 2, 4, rosa);
+    	fillRect(9, 11, 2, 1, rosa);
+    	fillRect(8, 13, 4, 1, rosa);
+    	putPixel(6,9,Color.black);
+    	putPixel(13,9,Color.black);
+    	putPixel(7,9,blanco);
+    	putPixel(12,9,blanco);
+    	fillRect(8, 10, 4, 1, cuerpo);
+    	fillRect(8, 12, 4, 1, cuerpo);
+    	putPixel(8,11,cafe);
+    	putPixel(11,11,cafe);
+    	
+    	
+    	
+    	
+    	
+      // fillRect(1, 9, 13, 6, Color.black);
+      
+       
+      
+      
+      //  drawVerticalLine(7,8,3,softOrange);
+       
+     
+      //  putPixel(9,7,darkBlue);
+        
+      //  putPixel(12,10,softOrange);
+      //  putPixel(7,8,softOrange);
+       drawSquareGrid(PIXEL_SIZE, Color.black);
+    	
+        // Guardamos la imagen en formato JPG
+    	
+    	
+        try {       
+            ImageIO.write(image, "jpg", new File("puercoMinecraft.jpg"));
+            System.out.println("EXITO !!!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private static void drawVerticalLine(int a, int b, int x, Color c){
+    	for(int i=a;i<=b;i++){
+     	   g.setColor(c);
+           g.fillRect(x * PIXEL_SIZE, i * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
+        }
+    }
+    
+    private static void drawHorizontalLine(int a, int b, int y, Color c){
+        for(int i=a;i<=b;i++){
+     	   g.setColor(c);
+           g.fillRect(i * PIXEL_SIZE, y * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
+        }
+    }
+    
+    private static void putPixel(int x, int y, Color c){       
+	   g.setColor(c);
+	   g.fillRect(x * PIXEL_SIZE, y * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);    
+    }
+    
+    private static void fillRect(int x, int y, int width, int height, Color c){
+    	g.setColor(c);
+    	g.fillRect(x * PIXEL_SIZE, y * PIXEL_SIZE, width*PIXEL_SIZE, height*PIXEL_SIZE);
+    }
+    
+    private static void drawSquareGrid(int size, Color c) {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {                
+                g.setColor(c);
+                g.drawRect(i * PIXEL_SIZE, j * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
+            }
+        }
+    }
+    private static void drawBackground(int size, Color c) {
+    	for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                g.setColor(c);
+                g.fillRect(i * PIXEL_SIZE, j * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);                
+            }
+        }
+    }
+    
+    
+    public static void main(String[] args) {
+        g = image.createGraphics();        
+        paint();
+    }
+}
